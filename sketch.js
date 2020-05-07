@@ -7,10 +7,10 @@ function preload() {
 }
 
 function setup() {
-	createCanvas(1280, 720);
+	createCanvas(1920, 944);
 	img.loadPixels();
 	img.updatePixels();
-	image(img, 0, 0, 1280, 720);
+	image(img, 0, 0, 1920, 944);
 
 }
 
@@ -26,7 +26,7 @@ function mark() {
 		}
 	}
 	img.updatePixels();
-	image(img, 0, 0, 1280, 720);
+	image(img, 0, 0, 1920, 944);
 }
 
 
