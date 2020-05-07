@@ -3,7 +3,7 @@ var brush = document.getElementById('brush');
 var img;
 
 function preload() {
-	img = loadImage('./chennai1992.jpg');
+	img = loadImage('./chennai1990.jpg');
 }
 
 function setup() {
