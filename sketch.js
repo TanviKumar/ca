@@ -31,6 +31,7 @@ function generate(n) {
 	var y1 = 1990;
 	var y2 = 2000;
 	var y3 = 2008;
+	// s1 = built up, s2 = greenery, s3 = water
 	let s1_1 = 0;
 	let s2_1 = 0;
 	let s3_1 = 0;
@@ -51,6 +52,8 @@ function generate(n) {
 			s1_3++;
 		} else if (img3.pixels[i+1] > 130) {
 			s2_3++;
+		} else if (img3.pixels[i] > 100) {
+			s1_3++;
 		} else {
 			s3_3++;
 		}
@@ -61,6 +64,8 @@ function generate(n) {
 			s1_2++;
 		} else if (img2.pixels[i+1] > 130) {
 			s2_2++;
+		} else if (img2.pixels[i] > 100) {
+			s1_2++;
 		} else {
 			s3_2++;
 		}
@@ -72,6 +77,8 @@ function generate(n) {
 			s1_1++;
 		} else if (img1.pixels[i+1] > 130) {
 			s2_1++;
+		} else if (img1.pixels[i] > 100) {
+			s1_1++;
 		} else {
 			s3_1++;
 		}
@@ -79,6 +86,10 @@ function generate(n) {
 	console.log(s1_3, s2_3, s3_3);
 	console.log(s1_2, s2_2, s3_2);
 	console.log(s1_1, s2_1, s3_1);
+	var td_builtup = ((s1_3 - s1_2) + 0.5*(s1_2 - s1_1)) / (step1*0.5 + step2);
+	var td_green = ((s2_3 - s2_2) + 0.5*(s2_2 - s2_1)) / (step1*0.5 + step2);
+	var td_water = ((s3_3 - s3_2) + 0.5*(s3_2 - s3_1)) / (step1*0.5 + step2);
+	console.log(td_builtup, td_green, td_water);
 }
 
 function mark() {
