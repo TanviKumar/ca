@@ -9,12 +9,9 @@
 	</head>
 	<body>
 		<div class="container"  id="mainDiv">
-			<div class="list-group" style="float: left; width: 200px;">
+			<div class="btn-group" style="float: left; width: 200px;">
 				<div class="list-group-item list-group-item-action list-group-item-primary">
-					Click on a tile to change
-				</div>
-				<div class="list-group-item list-group-item-action list-group-item-success">
-					<button onclick="downloadMap()">Download</button>
+					Map Handler
 				</div>
 				<div class="list-group-item list-group-item-action list-group-item-danger">
 					<div class="form-group" style="width: 150px;">
@@ -29,7 +26,12 @@
 					</div>
 				</div>
 				<div class="list-group-item list-group-item-action list-group-item-danger">
+					Marker Size
 					<input type="range" id="brush" name="vol" min="1" max="10" value="3">
+				</div>
+				<div class="list-group-item list-group-item-action list-group-item-danger">
+					Year
+					<input type="number" id="year" name="year" min="2016" max="2050" value="2020">
 				</div>
 			</div>
 		</div>
