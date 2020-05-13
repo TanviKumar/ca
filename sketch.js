@@ -10,6 +10,7 @@ var t_potential = [];
 var lcolor;
 
 function preload() {
+	//img1 = loadImage('./chennai1990_1.png');
 	img1 = loadImage('./chennai2000_2.png');
 	img2 = loadImage('./chennai2008_2.png');
 	img3 = loadImage('./chennai2016_1.png');
@@ -28,7 +29,7 @@ function setup() {
 	console.log(si);
 	img1.updatePixels();
 	//image(img4, 0, 0, 1920, 944);
-	generate(2020);
+	generate(2040);
 
 }
 
@@ -107,7 +108,8 @@ function generate(n) {
 		t_potential[i] = 0;
 	}
 	while(step3--) {
-
+		let w_l = 0;
+		let g_l = 0;
 		for (let i = 0; i < img4.pixels.length - 5; i+=4) {
 			// Growing land masses
 			if (img3.pixels[i + 1] > 210) {
@@ -125,7 +127,7 @@ function generate(n) {
 					if ((i/4) + width < t_potential.length && img3.get(x, y+1)[1] < 210 && img3.get(x, y+1)[1] > 130)
 						t_potential[(i/4) + width] += 1;
 				}
-				// Used to be water, recently became built-up hence influencing the blue around it.
+				// Used to be water, recently became built-up hence influencing the water around it.
 				if (img2.pixels[i + 2] > 210) {
 					console.log('reached water');
 					if ((i/4 > 1) && img3.get(x-1, y)[2] > 210)
@@ -141,23 +143,23 @@ function generate(n) {
 			}
 		}
 		console.log('out');
+		for(let j = 0; j < t_potential.length; ++j) {
+			if(t_potential[j] != 0) {
+				g_l++;
+			}
+		}
 		
-		let rem_builtup = req_builtup - l;
+		if (req_builtup - g_l < 0) {
+			step3 = 0;
+		}
 		
 		for(let k = 0; k < t_potential.length; ++k) {
-			if(t_potential[k] > 0 || t_potential[k] < 0) {
-				
+			if(t_potential[k] != 0) {				
 				img3.set(k % width, k / width, lcolor);
-			}
-			
+			}			
 		}
 		img3.updatePixels();
 		image(img3, 0, 0, 1920, 944);
-		if(rem_builtup < 0) {
-			//break;
-		} else {			
-			continue;
-		}
 	}
 	for (let j = 0; j < t_potential.length; ++j) {
 		if(t_potential[j] > 0) {
@@ -172,6 +174,19 @@ function generate(n) {
 			l++;
 		}
 	}
+	s1_3 = s2_3 = s3_3 = 0;
+	for(let i = 0; i < img3.pixels.length; i+=4) {
+		if (img3.pixels[i + 1] > 210) {
+			s1_3++;
+		} else if (img3.pixels[i+1] > 130) {
+			s2_3++;
+		} else if (img3.pixels[i] > 100) {
+			s1_3++;
+		} else {
+			s3_3++;
+		}
+	}
+	console.log(s1_3, s2_3, s3_3);
 	image(img3, 0, 0, 1920, 944);
 	console.log(l, l1, g, w, t_potential.length);
 }
